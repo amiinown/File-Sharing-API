@@ -10,10 +10,10 @@ class UserAdmin(BaseUserAdmin):
 
     list_display = ('email', 'username', 'is_staff',)
     list_filter = ('is_staff',)
-    readonly_fields = ('last_login', 'created')
+    readonly_fields = ('last_login', 'created_at')
     fieldsets = (
         ('User information', {'fields':('email', 'username', 'password',)}),
-        ('Permissions', {'fields':('is_staff', 'is_active', 'last_login', 'created')}),
+        ('Permissions', {'fields':('is_staff', 'is_active', 'last_login', 'created_at')}),
     )
     add_fieldsets = (
         (None, {'fields':('email', 'username', 'is_staff', 'password1', 'password2')}),
