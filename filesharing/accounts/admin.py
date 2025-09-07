@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
-from .models import User
+from .models import User, Otp
 
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
@@ -24,3 +24,9 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.unregister(Group)
 admin.site.register(User, UserAdmin)
+
+@admin.register(Otp)
+class OTPAdmin(admin.ModelAdmin):
+    list_display = ('user', 'otp_code', 'created_at')
+    search_fields = ('user__email', 'otp_code')
+    readonly_fields = ('created_at',)

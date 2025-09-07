@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 load_dotenv()
 
@@ -45,8 +46,11 @@ INSTALLED_APPS = [
     'file.apps.FileConfig',
     'folder.apps.FolderConfig',
     'group.apps.GroupConfig',
+    
     'rest_framework',
+    'rest_framework_simplejwt',
     'storages',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +61,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'common.middlewares.s3_exceptions.S3ExeptionsMiddleware',
 ]
+
+APPEND_SLASH = False
 
 ROOT_URLCONF = 'filesharing.urls'
 
@@ -156,3 +164,59 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
 AWS_DEFAULT_ACL = 'private'
 AWS_S3_FILE_OVERWRITE = False
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_SCHEMA_CLASS':(
+        'drf_spectacular.openapi.AutoSchema'
+    ),
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+}
+
+# Google mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'thisisformcfee@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = "Amiinown File Sharing API"
+
+
+# Celery Configuration Options
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_RESULT_BACKEND = 'rpc://'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Tehran'
+CELERY_RESULT_EXPIRES = timedelta(days=1)
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
+CELERY_TASK_SOFT_TIME_LIMIT = 25 * 60  # 25 minutes
+CELERY_TASK_ACKS_LATE = True
+CELERY_WORKER_CONCURRENCY = 4
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
+CELERY_WORKER_PREFETCH_MULTIPLIER = 5
+CELERY_TASK_ALWAYS_EAGER = False
+
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'File Sharing API',
+    'DESCRIPTION': 'A RESTful API for managing file sharing with versioning, '
+                   'groups, and role-based permissions. Supports file upload, '
+                   'access control for owners and members, and asynchronous tasks '
+                   'with Celery.',
+    'VERSION': '1.0.0',
+}

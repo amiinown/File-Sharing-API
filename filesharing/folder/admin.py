@@ -3,7 +3,8 @@ from .models import Folder
 
 @admin.register(Folder)
 class FolderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'owner', 'parent', 'created_at')
+    list_display = ('name', 'owner', 'parent', 'created_at')
+    raw_id_fields = ('owner', 'group', 'parent')
     list_filter = ('owner',)
     search_fields = ('name', 'owner')
     ordering = ('created_at',)

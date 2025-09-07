@@ -15,7 +15,7 @@ class UserGroupPermission(models.Model):
         READ = 'READ', 'Read'
         READ_WRITE = 'READ_WRITE', 'Read & Write'
 
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='user_permissions')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     permission = models.CharField(max_length=20, choices=Role.choices, default=Role.READ)
 
