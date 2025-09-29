@@ -147,3 +147,14 @@ celery -A filesharing worker -l info
 
 * For email-related features (like password reset), **Django**, **RabbitMQ**, and **Celery** must be running at the same time.
 * Ensure `.env` contains correct values for database, s3, and email service.
+* The project uses **ArvanCloud S3** for file storage. You can change the settings in `settings.py` to use a different S3-compatible service if needed.
+* 
+---
+
+### Available documentation UIs:
+
+* **Swagger UI:** [http://localhost:8000/schema/swagger-ui/](http://localhost:8000/schema/swagger-ui/)
+* **Redoc:** [http://localhost:8000/schema/redoc/](http://localhost:8000/schema/redoc/)
+* **Raw OpenAPI schema (YAML/JSON):** [http://localhost:8000/schema/](http://localhost:8000/schema/)
+
+These tools are especially useful for **frontend developers** to easily explore available endpoints, parameters, and response formats.
