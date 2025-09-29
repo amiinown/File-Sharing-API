@@ -1,12 +1,12 @@
 # FileSharing API — README
 
 ![Python](https://img.shields.io/badge/Python-3.12.3-blue?logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-5.2-green?logo=django&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.2.4-green?logo=django&logoColor=white)
 ![DRF](https://img.shields.io/badge/DRF-3.16-red?logo=django&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql&logoColor=white)
-![Celery](https://img.shields.io/badge/Celery-5.5-green?logo=celery&logoColor=white)
-![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.13-orange?logo=rabbitmq&logoColor=white)
-![S3](https://img.shields.io/badge/AWS_S3-1.39.13-blue?logo=amazonaws&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17.5-blue?logo=postgresql&logoColor=white)
+![Celery](https://img.shields.io/badge/Celery-5.5.3-green?logo=celery&logoColor=white)
+![RabbitMQ](https://img.shields.io/badge/RabbitMQ-4.1.2-orange?logo=rabbitmq&logoColor=white)
+![S3](https://img.shields.io/badge/boto3-1.39.13-blue?logo=amazonaws&logoColor=white)
 
 
 **Overview**
